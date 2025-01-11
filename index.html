@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Odin Project | Etch-A-Sketch</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <main class="device-container">
+        <section class="control-panel">
+          <form>
+            <fieldset class="grid-size-settings">
+              <legend>Grid Size</legend>
+              <div>
+                <input
+                  type="radio"
+                  name="gridSize"
+                  id="grid-size-small"
+                  value="small"
+                  checked
+                />
+                <label for="grid-size-small">Small</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="gridSize"
+                  id="grid-size-medium"
+                  value="medium"
+                />
+                <label for="grid-size-medium">Medium</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="gridSize"
+                  id="grid-size-large"
+                  value="large"
+                />
+                <label for="grid-size-large">Large</label>
+              </div>
+            </fieldset>
+
+            <fieldset class="brush-type-settings">
+              <legend>Brush Type</legend>
+              <div>
+                <input
+                  type="radio"
+                  name="brushType"
+                  id="solid"
+                  value="solid"
+                  checked
+                />
+                <label for="solid">Solid</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="brushType"
+                  id="rainbow"
+                  value="rainbow"
+                />
+                <label for="rainbow">Rainbow</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="brushType"
+                  id="color-sampler"
+                  value="color-sampler"
+                />
+                <label for="color-sampler">Color Sampler</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="brushType"
+                  id="eraser"
+                  value="eraser"
+                />
+                <label for="eraser">Eraser</label>
+              </div>
+            </fieldset>
+
+            <fieldset class="brush-behavior-settings">
+              <legend>Brush Behavior</legend>
+              <input type="color" id="color-picker" name="color" />
+              <input type="checkbox" id="sticky" />
+              <label for="sticky">Sticky</label>
+              <input type="checkbox" id="additive" />
+              <label for="additive">Additive</label>
+            </fieldset>
+
+            <fieldset class="board-settings">
+              <input type="checkbox" id="gridlines" />
+              <label for="gridlines">Gridlines</label>
+              <button type="button" id="clear">Clear</button>
+            </fieldset>
+          </form>
+        </section>
+
+        <section class="drawing-panel">
+          <h1>Etch-A-Sketch</h1>
+          <div class="grid-board"></div>
+        </section>
+      </main>
+      <footer>
+        Challenge by
+        <a
+          href="https://www.theodinproject.com/lessons/foundations-etch-a-sketch#project-solution"
+          >The Odin Project</a
+        >, coded by <a href="https://github.com/sydalwedaie">Sayed Ali</a>
+      </footer>
+    </div>
+    <script src="/index.js"></script>
+  </body>
+</html>
