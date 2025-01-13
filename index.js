@@ -1,76 +1,75 @@
 /* Features
-- Size setting (slider, buttons, dropdown)
-- Different brush modes (gray, color, rainbow)
-- color picker
-- Eraser brush (full eraser, lightening brush)
-- Clear (option for shake animation)
-- Trace on hover
-- Single click to draw
-- color picker
+- [x] Size setting (slider, buttons, dropdown)
+- [x] Different brush modes (gray, color, rainbow)
+- [x] color picker
+- [-] Eraser brush (full eraser, lightening brush)
+- [-] Clear (option for shake animation)
+- [x] Single click to draw
+- [x] color picker
 */
 
 const gridBoardEl = document.querySelector(".grid-board");
 const clearBtnEl = document.querySelector("#clear");
 const controlPanelEl = document.querySelector(".control-panel form");
 
-const settings = {
+const state = {
   gridSize: "small",
   brushType: "solid",
   color: "black",
-  sticky: false,
   additive: false,
   gridlines: true,
   isDrawing: false,
-  previousColor: "",
 };
 
 controlPanelEl.addEventListener("change", (e) => {
   updateSettings(e);
   updateGridSize(e);
-  console.table(settings);
+  updateGridlines(e);
 });
 
+controlPanelEl.addEventListener("click", (e) => {
+  if (e.target.id === "clear") {
+    gridBoardEl.querySelectorAll(".grid-square").forEach((square) => {
+      square.style.backgroundColor = "";
+    });
+  }
+});
 // -------------------------
 // Draw Events
 // -------------------------
+
+gridBoardEl.addEventListener("dblclick", () => {
+  // double click to start sticky mode
+  state.isDrawing = true;
+});
+
+gridBoardEl.addEventListener("mousedown", (e) => {
+  fillSquare(e); // to start filling the very first square
+  state.isDrawing = true;
+});
+
+gridBoardEl.addEventListener("mouseup", () => {
+  // Also fires when single-clicking in sticky mode.
+  state.isDrawing = false;
+});
+
 gridBoardEl.addEventListener("mouseover", (e) => {
-  settings.previousColor = e.target.style.backgroundColor;
-  if (settings.isDrawing) return;
-  fillSquare(e);
+  if (state.isDrawing) fillSquare(e);
 });
 
-gridBoardEl.addEventListener("mouseout", (e) => {
-  if (settings.isDrawing) return;
-  clearSquare(e);
+gridBoardEl.addEventListener("mouseleave", () => {
+  // Solves bug when cursor keeps drawing when comes back from out of grid
+  state.isDrawing = false;
 });
-
-gridBoardEl.addEventListener("mousedown", () => {
-  settings.isDrawing = true;
-});
-
-gridBoardEl.addEventListener("mousemove", (e) => {
-  e.preventDefault();
-  if (settings.isDrawing) {
-    fillSquare(e);
-    e.target.classList.add("filled");
-  }
-});
-
-gridBoardEl.addEventListener("mouseup", (e) => {
-  settings.isDrawing = false;
-  console.log(e.target.style.backgroundColor);
-});
-
-gridBoardEl.addEventListener("click", (e) => {});
 
 // -------------------------
 // Event Handlers
 // -------------------------
 function updateSettings(e) {
   if (e.target.name) {
-    settings[e.target.name] = e.target.value;
+    state[e.target.name] = e.target.value;
   } else if (e.target.id) {
-    settings[e.target.id] = e.target.checked;
+    state[e.target.id] = e.target.checked;
   }
 }
 
@@ -91,15 +90,36 @@ function updateGridSize(e) {
   }
 }
 
-function fillSquare(e) {
-  if (e.target.classList.contains("grid-square")) {
-    e.target.style.backgroundColor = settings.color;
+function updateGridlines(e) {
+  if (e.target.id === "gridlines") {
+    gridBoardEl.querySelectorAll(".grid-square").forEach((square) => {
+      square.style.border = e.target.checked ? "" : "none";
+    });
   }
 }
 
-function clearSquare(e) {
-  if (e.target.classList.contains("grid-square")) {
-    e.target.style.backgroundColor = settings.previousColor;
+function fillSquare(e) {
+  if (!e.target.matches(".grid-square div")) return;
+  switch (state.brushType) {
+    case "solid":
+      e.target.style.backgroundColor = state.color;
+      if (state.additive) {
+        if (e.target.style.opacity) {
+          const newOpacity = parseFloat(e.target.style.opacity) + 0.1;
+          e.target.style.opacity = Math.min(1, newOpacity);
+        } else {
+          e.target.style.opacity = 0.1;
+        }
+      }
+
+      break;
+    case "rainbow":
+      e.target.style.backgroundColor = randomColor();
+      break;
+    // "rgb(248, 73, 111)"
+    case "eraser":
+      e.target.style.backgroundColor = "";
+      break;
   }
 }
 
@@ -112,11 +132,24 @@ function drawGrid(size) {
   let gridSquareSize = gridBoardEl.offsetWidth / size;
   for (let i = 0; i < size ** 2; i++) {
     let gridSquareEl = document.createElement("div");
+    let innerSquareEl = document.createElement("div");
     gridSquareEl.classList.add("grid-square");
     gridSquareEl.style.width = `${gridSquareSize}px`;
     gridSquareEl.style.height = `${gridSquareSize}px`;
+
+    gridSquareEl.appendChild(innerSquareEl);
     gridBoardEl.appendChild(gridSquareEl);
   }
+}
+
+// -------------------------
+// Utiliy Functions
+// -------------------------
+function randomColor() {
+  const randomRed = Math.floor(Math.random() * 255);
+  const randomGreen = Math.floor(Math.random() * 255);
+  const randomBlue = Math.floor(Math.random() * 255);
+  return `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`;
 }
 
 drawGrid(16);

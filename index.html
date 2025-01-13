@@ -11,7 +11,7 @@
       <main class="device-container">
         <section class="control-panel">
           <form>
-            <fieldset class="grid-size-settings">
+            <fieldset>
               <legend>Grid Size</legend>
               <div>
                 <input
@@ -43,7 +43,7 @@
               </div>
             </fieldset>
 
-            <fieldset class="brush-type-settings">
+            <fieldset>
               <legend>Brush Type</legend>
               <div>
                 <input
@@ -68,15 +68,6 @@
                 <input
                   type="radio"
                   name="brushType"
-                  id="color-sampler"
-                  value="color-sampler"
-                />
-                <label for="color-sampler">Color Sampler</label>
-              </div>
-              <div>
-                <input
-                  type="radio"
-                  name="brushType"
                   id="eraser"
                   value="eraser"
                 />
@@ -84,17 +75,15 @@
               </div>
             </fieldset>
 
-            <fieldset class="brush-behavior-settings">
-              <legend>Brush Behavior</legend>
+            <fieldset>
+              <legend>Brush Settings</legend>
               <input type="color" id="color-picker" name="color" />
-              <input type="checkbox" id="sticky" />
-              <label for="sticky">Sticky</label>
               <input type="checkbox" id="additive" />
               <label for="additive">Additive</label>
             </fieldset>
 
-            <fieldset class="board-settings">
-              <input type="checkbox" id="gridlines" />
+            <fieldset>
+              <input type="checkbox" id="gridlines" checked />
               <label for="gridlines">Gridlines</label>
               <button type="button" id="clear">Clear</button>
             </fieldset>
