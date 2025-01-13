@@ -16,7 +16,7 @@ const state = {
   gridSize: "small",
   brushType: "solid",
   color: "black",
-  additive: false,
+  shadingMode: false,
   gridlines: true,
   isDrawing: false,
 };
@@ -71,6 +71,7 @@ function updateSettings(e) {
   } else if (e.target.id) {
     state[e.target.id] = e.target.checked;
   }
+  console.table(state);
 }
 
 function updateGridSize(e) {
@@ -103,7 +104,9 @@ function fillSquare(e) {
   switch (state.brushType) {
     case "solid":
       e.target.style.backgroundColor = state.color;
-      if (state.additive) {
+      if (!state.shadingMode) {
+        e.target.style.opacity = "";
+      } else {
         if (e.target.style.opacity) {
           const newOpacity = parseFloat(e.target.style.opacity) + 0.1;
           e.target.style.opacity = Math.min(1, newOpacity);
@@ -114,11 +117,23 @@ function fillSquare(e) {
 
       break;
     case "rainbow":
+      e.target.style.opacity = "";
       e.target.style.backgroundColor = randomColor();
       break;
     // "rgb(248, 73, 111)"
     case "eraser":
-      e.target.style.backgroundColor = "";
+      if (!state.shadingMode) {
+        e.target.style.backgroundColor = "";
+      } else {
+        {
+          if (e.target.style.opacity) {
+            const newOpacity = parseFloat(e.target.style.opacity) - 0.1;
+            e.target.style.opacity = Math.max(0, newOpacity);
+          } else {
+            e.target.style.opacity = 0.9;
+          }
+        }
+      }
       break;
   }
 }
