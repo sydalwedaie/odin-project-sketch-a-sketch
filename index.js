@@ -29,8 +29,9 @@ controlPanelEl.addEventListener("change", (e) => {
 
 controlPanelEl.addEventListener("click", (e) => {
   if (e.target.id === "clear") {
-    gridBoardEl.querySelectorAll(".grid-square").forEach((square) => {
+    gridBoardEl.querySelectorAll(".grid-square div").forEach((square) => {
       square.style.backgroundColor = "";
+      square.style.opacity = "";
     });
   }
 });
