@@ -4,8 +4,8 @@
 
 This is a solution to the [Sketch-a-Sketch project from The Odin Project](https://www.theodinproject.com/lessons/foundations-etch-a-sketch).
 
-- Solution on [GitHub](https://your-solution-url.com)
-- Live Site on [Netlify](https://your-live-site-url.com)
+- Solution on [GitHub](https://github.com/sydalwedaie/odin-project-sketch-a-sketch?tab=readme-ov-file)
+- Live Site on [Netlify](https://odin-project-sketch-a-sketch-ek8se.netlify.app/)
 
 ## Features
 
