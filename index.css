@@ -18,21 +18,109 @@ legend {
   padding: 0;
 }
 
-fieldset {
-  border: none;
+/* Variables */
+:root {
+  --color-frame-border: #37aedd;
 }
+
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+AU+SA&display=swap");
 
 /* General */
 body {
   font-family: "Roboto", sans-serif;
+  color: #333333;
   background-color: #ececec;
 }
 
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Control Panel */
+.device-container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+fieldset {
+  width: 150px;
+  border: 1px solid var(--color-frame-border);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* justify-content: center; */
+  /* align-items: center; */
+  text-align: center;
+}
+
+legend {
+  padding: 5px 10px;
+  border: 1px solid var(--color-frame-border);
+  border-radius: 5px;
+}
+
+label,
+button {
+  background-color: white;
+  border: 1px solid white;
+  padding: 5px;
+  &:active {
+    background-color: antiquewhite;
+    border: 1px solid #c7c7c7;
+  }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  display: none;
+  &:checked + label {
+    background-color: antiquewhite;
+    border: 1px solid #c7c7c7;
+    font-weight: bold;
+  }
+}
+
+input[type="color"] {
+  width: 100%;
+  height: 30px;
+}
+
+/* Drawing Panel */
+.drawing-panel {
+  border: 1px solid var(--color-frame-border);
+  padding: 10px;
+  h1 {
+    text-align: center;
+    padding: 15px;
+  }
+}
+
 /* Grid Layout */
+.grid-wrapper {
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-color: #eee;
+}
 .grid-board {
   background-color: #fff;
   display: flex;
-  width: 500px;
+  width: 550px;
+  height: 550px;
   flex-wrap: wrap;
 }
 
@@ -50,5 +138,15 @@ body {
 }
 
 .grid-square div:hover {
-  border: 1px solid rgb(27, 103, 226);
+  border: 1px solid var(--color-frame-border);
+}
+
+/* Footer */
+footer {
+  font-size: 12px;
+  a {
+    color: var(--color-frame-border);
+    font-weight: bold;
+    text-decoration: none;
+  }
 }

@@ -1,21 +1,11 @@
-/* Features
-- [x] Size setting (slider, buttons, dropdown)
-- [x] Different brush modes (gray, color, rainbow)
-- [x] color picker
-- [-] Eraser brush (full eraser, lightening brush)
-- [-] Clear (option for shake animation)
-- [x] Single click to draw
-- [x] color picker
-*/
-
 const gridBoardEl = document.querySelector(".grid-board");
 const clearBtnEl = document.querySelector("#clear");
-const controlPanelEl = document.querySelector(".control-panel form");
+const controlPanelEl = document.querySelector(".control-panel");
 
 const state = {
   gridSize: "small",
   brushType: "solid",
-  color: "black",
+  color: "#333333",
   shadingMode: false,
   gridlines: true,
   isDrawing: false,
@@ -63,6 +53,15 @@ gridBoardEl.addEventListener("mouseleave", () => {
   state.isDrawing = false;
 });
 
+// Touch Events
+gridBoardEl.addEventListener("touchstart", (e) => {
+  fillSquare(e);
+});
+
+gridBoardEl.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+});
+
 // -------------------------
 // Event Handlers
 // -------------------------
@@ -72,7 +71,6 @@ function updateSettings(e) {
   } else if (e.target.id) {
     state[e.target.id] = e.target.checked;
   }
-  console.table(state);
 }
 
 function updateGridSize(e) {
