@@ -22,8 +22,7 @@
                   checked
                 />
                 <label for="grid-size-small">Small</label>
-              </div>
-              <div>
+
                 <input
                   type="radio"
                   name="gridSize"
@@ -31,8 +30,7 @@
                   value="medium"
                 />
                 <label for="grid-size-medium">Medium</label>
-              </div>
-              <div>
+
                 <input
                   type="radio"
                   name="gridSize"
@@ -54,8 +52,7 @@
                   checked
                 />
                 <label for="solid">Solid</label>
-              </div>
-              <div>
+
                 <input
                   type="radio"
                   name="brushType"
@@ -63,8 +60,7 @@
                   value="rainbow"
                 />
                 <label for="rainbow">Rainbow</label>
-              </div>
-              <div>
+
                 <input
                   type="radio"
                   name="brushType"
@@ -77,15 +73,20 @@
 
             <fieldset>
               <legend>Brush Settings</legend>
-              <input type="color" id="color-picker" name="color" />
-              <input type="checkbox" id="shadingMode" />
-              <label for="shadingMode">Shading Mode</label>
+              <div>
+                <input type="color" id="color-picker" name="color" />
+
+                <input type="checkbox" id="shadingMode" />
+                <label for="shadingMode">Shading Mode</label>
+              </div>
             </fieldset>
 
             <fieldset>
-              <input type="checkbox" id="gridlines" checked />
-              <label for="gridlines">Gridlines</label>
-              <button type="button" id="clear">Clear</button>
+              <div>
+                <input type="checkbox" id="gridlines" checked />
+                <label for="gridlines">Gridlines</label>
+                <button type="button" id="clear">Clear</button>
+              </div>
             </fieldset>
           </form>
         </section>

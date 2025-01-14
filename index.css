@@ -1,12 +1,38 @@
+/* Reset */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+html,
+body,
+h1,
+p,
+label,
+input,
+button,
+fieldset,
+legend {
+  margin: 0;
+  padding: 0;
+}
+
+fieldset {
+  border: none;
+}
+
+/* General */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ececec;
+}
+
+/* Grid Layout */
 .grid-board {
+  background-color: #fff;
   display: flex;
-  width: 220px;
+  width: 500px;
   flex-wrap: wrap;
 }
 
